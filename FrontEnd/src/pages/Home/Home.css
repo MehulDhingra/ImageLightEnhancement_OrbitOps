@@ -1,0 +1,62 @@
+/* Home.css */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+    font-family: Arial, sans-serif; /* Sets a clean, modern font */
+}
+
+.mainpage {
+    display: flex;
+    flex-direction: column;
+    height: 500vh; /* Adjusts to accommodate 5 full-screen pages */
+}
+
+.page1, .page2, .page3, .page4, .page5 {
+    height: 100vh; /* Ensures each page takes the full viewport height */
+    width: 100%; /* Ensures each page takes the full viewport width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    color: white;
+    scroll-snap-align: start; /* Aligns each page at the start on scroll */
+}
+
+.page1 {
+    position: relative; /* Allows absolute positioning of the content within this div */
+}
+
+.page1-content {
+    position: absolute; /* Positioning over the globe */
+    top: 50%; /* Centers vertically */
+    left: 50%; /* Centers horizontally */
+    transform: translate(-50%, -50%); /* Adjusts for exact center */
+    text-align: center;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 60vw;
+    color: white; /* Ensures text is readable */
+    z-index: 1; /* Places text above the globe */
+    cursor:crosshair;
+}
+
+.page2 {
+    background-color: #ff6f61;
+}
+
+.page3 {
+    background-color: #6a4f4b;
+}
+
+.page4 {
+    background-color: #88b04b;
+}
+
+.page5 {
+    background-color: #2f4f4f;
+}
