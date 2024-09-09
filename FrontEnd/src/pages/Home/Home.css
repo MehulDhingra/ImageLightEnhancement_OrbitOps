@@ -5,6 +5,7 @@ body, html {
     padding: 0;
     overflow-x: hidden; /* Prevents horizontal scrolling */
     font-family: Arial, sans-serif; /* Sets a clean, modern font */
+    /* background-image: src; */
 }
 
 .mainpage {
@@ -41,7 +42,7 @@ body, html {
     flex-direction: column;
     width: 60vw;
     color: white; /* Ensures text is readable */
-    z-index: 1; /* Places text above the globe */
+    z-index: 10; /* Places text above the globe */
     cursor:crosshair;
 }
 

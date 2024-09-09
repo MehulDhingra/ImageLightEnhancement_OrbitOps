@@ -14,12 +14,9 @@ function Upload() {
   const [error, setError] = useState(null);
   const [split, setSplit] = useState(false);
 
-         
-
   const handleUploadImage = async () => {
-  
     if (!selectedImage) return;
-    setSplit(true)
+    setSplit(true);
     setLoading(true);
     setError(null);
 
@@ -38,7 +35,6 @@ function Upload() {
         throw new Error("Failed to upload and process image");
       }
 
-      // Get the processed image blob and convert it to URL
       const blob = await response.blob();
       const imageUrl = URL.createObjectURL(blob);
 
@@ -80,18 +76,25 @@ function Upload() {
     return new File([new Uint8Array(array)], filename, { type: mime });
   };
 
-  let bgImage = "https://i.ibb.co/QJgRcYD/stars.jpg";
+  let bgImage =
+    "https://images.unsplash.com/photo-1578615437406-511cafe4a5c7?q=80&w=2605&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
   return (
     <>
       <div
         className="flex flex-col items-center justify-center px-4 relative min-h-screen"
-        style={{ backgroundImage: `url(${bgImage})`, backgroundSize: "cover" }}
+        style={{
+          backgroundImage: `url(${bgImage})`,
+          backgroundSize:"cover",
+          // transform: "rotate(90deg)",
+        }}
       >
-        <Link to="/" className="self-start mb-4">
-          <HiArrowNarrowLeft color="white" className="text-3xl text-gray-600 hover:text-indigo-600 transition-colors duration-200" />
+          <Link to="/" className="self-start mb-4">
+          <HiArrowNarrowLeft
+            color="white"
+            className="text-3xl text-gray-600 hover:text-indigo-600 transition-colors duration-200"
+          />
         </Link>
-
 
         {split ? (
           <div className="flex flex-col items-center max-w-5xl w-full">
@@ -106,27 +109,31 @@ function Upload() {
                 )}
               </div>
               <div className="w-1/2 bg-gray-100 flex items-center justify-center">
-                {loading?(<div className="w-full flex items-center justify-center">
-              <FaSpinner className="animate-spin text-gray-600 text-5xl" />
-            </div>):(processedImage && 
-                  <img
-                    src={processedImage}
-                    alt="Processed Preview"
-                    className="w-full h-full object-cover"
-                  />
-                )  }
+                {loading ? (
+                  <div className="w-full flex items-center justify-center">
+                    <FaSpinner className="animate-spin text-gray-600 text-5xl" />
+                  </div>
+                ) : (
+                  processedImage && (
+                    <img
+                      src={processedImage}
+                      alt="Processed Preview"
+                      className="w-full h-full object-cover"
+                    />
+                  )
+                )}
               </div>
             </div>
             <div className="mt-4 flex gap-4">
               <button
-                className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-200 flex items-center"
+                className="px-6 py-3 bg-cyan-600 text-white rounded-lg hover:bg-green-700 transition duration-200 flex items-center"
                 onClick={handleDownloadImage}
               >
                 <FiDownload className="mr-2" />
                 Download Processed Image
               </button>
               <button
-                className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition duration-200 flex items-center"
+                className="px-6 py-3 bg-yellow-600 text-white rounded-lg hover:bg-indigo-700 transition duration-200 flex items-center"
                 onClick={handleUploadNewImage}
               >
                 <LuUpload className="mr-2" />
@@ -134,7 +141,14 @@ function Upload() {
               </button>
             </div>
           </div>
-        ):<UploadMain handleUploadImage={handleUploadImage} selectedImage={selectedImage} setSelectedImage={setSelectedImage} error={error} /> }
+        ) : (
+          <UploadMain
+            handleUploadImage={handleUploadImage}
+            selectedImage={selectedImage}
+            setSelectedImage={setSelectedImage}
+            error={error}
+          />
+        )}
       </div>
     </>
   );

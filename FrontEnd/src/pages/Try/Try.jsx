@@ -1,57 +1,30 @@
 import React, { useEffect, useState } from "react";
 import "./Try.css";
 import stars from "../../assets/stars.jpg";
-import stars1 from "../../assets/stars.png";
 import scroll from "../../Image/scroll.jpg";
 import clouds from "../../assets/clouds.png";
-import moon from "../../assets/moon.png";
-
+import moon3d from "../../Image/moon3d.jpg";
 
 function Try() {
   const [isButton, setIsButton] = useState(false);
 
-  const scrollToSection = () => {
-    const section = document.getElementById("page_2");
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      const page1 = document.querySelector(".page_1");
-      const page2 = document.querySelector(".page_2");
-      const moonElement = document.querySelector(".moon");
-      const page1Height = page1.clientHeight;
-      const page2Top = page2.getBoundingClientRect().top;
-      const scrollPosition = window.scrollY;
-
-      if (scrollPosition <= page1Height) {
-        const scale = 1 - scrollPosition / (page1Height * 1.2);
-        moonElement.style.width = `${50 * Math.max(scale, 0.2)}vw`;
-      }
-
-      if (page2Top <= window.innerHeight) {
-        setIsButton(true);
-        moonElement.style.pointerEvents = "auto";
-      } else {
-        setIsButton(false);
-        moonElement.style.pointerEvents = "none";
-      }
-    };
-
     const handleMoonClick = () => {
       if (isButton) {
         window.location.href = "/upload";
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-
     const moonElement = document.querySelector(".moon");
     moonElement.addEventListener("click", handleMoonClick);
 
-    // Intersection Observer for slide-in effect
     const slideImages = document.querySelectorAll(".slide-left, .slide-right");
 
     const observer = new IntersectionObserver(
@@ -68,7 +41,6 @@ function Try() {
     slideImages.forEach((img) => observer.observe(img));
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
       moonElement.removeEventListener("click", handleMoonClick);
       slideImages.forEach((img) => observer.unobserve(img));
     };
@@ -77,24 +49,32 @@ function Try() {
   return (
     <>
       <div className="main">
+        <div className="stars">
+          <img src={stars} alt="stars" />
+        </div>
+
+        {/* Heading below the navbar */}
+        <div className="text-container">
+          <b>
+              <br>
+              </br>
+            <p className="heading" style={{ fontFamily: "inherit"}}>
+              Low Light Image Enhancements of PSRs
+            </p>
+          </b>
+        </div>
+
         <div className="page_1">
-          <div className="stars">
-            <img src={stars} alt="stars" />
-          </div>
           <div className="cloud">
             <img src={clouds} alt="clouds" />
             <img src={clouds} alt="clouds" />
           </div>
           <button className={`moon ${isButton ? "moon-button" : ""}`}>
-            <img src={moon} alt="moon" />
+            {/* <img src={moon3d} alt="moon" style={{ height: '50vh' }} /> */}
           </button>
-          <div className="text-container">
-            <p className="heading">
-              The Moon is magic for the soul and light for the senses..
-            </p>
-          </div>
+
           <button
-            onClick={scrollToSection}
+            onClick={() => scrollToSection("page_2")}
             style={{
               position: "fixed",
               bottom: "20px",
@@ -108,21 +88,43 @@ function Try() {
               zIndex: "5",
             }}
           >
-            <img
+            {/* <img
               src={scroll}
               alt="Scroll to Section"
               style={{ width: "50px", height: "50px" }}
-            />
+            /> */}
           </button>
         </div>
 
         <div id="page_2" className="page_2">
-          <div className="stars1">
-            <img src={stars1} alt="stars" />
+          <div className="text-container">
+            {/* <p className="heading">Page 2 Content</p> */}
+            <p className="heading"></p>
           </div>
-          {/* Updated images for sliding animation */}
-          <img className="slide-left" src={moon} alt="Image sliding in from left" />
-          <img className="slide-right" src={clouds} alt="Image sliding in from right" />
+          <button
+            onClick={() => scrollToSection("page_3")}
+            style={{
+              position: "fixed",
+              bottom: "20px",
+              right: "20px",
+              padding: "10px 10px",
+              backgroundColor: "Transparent",
+              color: "white",
+              border: "none",
+              borderRadius: "545px",
+              cursor: "pointer",
+              zIndex: "5",
+            }}
+          >
+          
+          </button>
+        </div>
+
+        <div id="page_3" className="page_3">
+          <div className="text-container">
+           {/* <p className="heading">Page 2 Content</p> */}
+           <p className="heading"></p>
+          </div>
         </div>
       </div>
     </>

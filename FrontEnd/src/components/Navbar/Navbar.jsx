@@ -7,7 +7,7 @@ function Navbar() {
       <div className="nav fixed">
           <div className="navmain">
             <div className="left">
-              <span style={{marginLeft:"3vmin"}}>GeekPie</span>
+              <span style={{marginLeft:"3vmin"}}>O R B I T O P S </span>
             </div>
             <div className="right ">
               <a href="/upload">
